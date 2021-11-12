@@ -1,11 +1,15 @@
 package com.edushare.thecoffeemakerapp.coffee.pump
 
 import com.edushare.thecoffeemakerapp.coffee.Heater
-import com.edushare.thecoffeemakerapp.coffee.pump.Pump
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class Thermosiphon(val heater: Heater) : Pump {
+class Thermosiphon : Pump, KoinComponent {
+
+    private val heater: Heater by inject()
+
     override fun pump() {
-        if (heater.isHot()){
+        if (heater.isHot()) {
             println("=> => pumping => =>")
         }
     }

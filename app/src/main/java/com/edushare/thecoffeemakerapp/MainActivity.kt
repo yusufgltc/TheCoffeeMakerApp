@@ -7,6 +7,9 @@ import com.edushare.thecoffeemakerapp.coffee.ElectricHeater
 import com.edushare.thecoffeemakerapp.coffee.Heater
 import com.edushare.thecoffeemakerapp.coffee.pump.Pump
 import com.edushare.thecoffeemakerapp.coffee.pump.Thermosiphon
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
@@ -16,13 +19,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val coffeeMaker: CoffeeMaker by inject()
+
         val coffeeMakerModule = module {
-            single { CoffeeMaker(get(), get()) }
-            single<Pump> { Thermosiphon(get()) }
+            single { CoffeeMaker(get()) }
+            single<Pump> { Thermosiphon() }
             single<Heater> { ElectricHeater() }
         }
 
         startKoin {
+            androidLogger()
+            androidContext(this@MainActivity)
             modules(coffeeMakerModule)
         }
         CoffeeApp().run()

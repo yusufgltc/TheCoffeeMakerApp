@@ -1,10 +1,8 @@
 package com.edushare.thecoffeemakerapp.coffee
 
-import com.edushare.thecoffeemakerapp.coffee.Heater
-
 class ElectricHeater : Heater {
 
-    var heating : Boolean = false
+    var heating: Boolean = false
 
     override fun on() {
         println("~ ~ ~ heating ~ ~ ~")
