@@ -21,12 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         val coffeeMaker: CoffeeMaker by inject()
 
-        val coffeeMakerModule = module {
-            single { CoffeeMaker(get()) }
-            single<Pump> { Thermosiphon() }
-            single<Heater> { ElectricHeater() }
-        }
-
         startKoin {
             androidLogger()
             androidContext(this@MainActivity)
